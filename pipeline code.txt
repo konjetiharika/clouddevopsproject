@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        stage('Notify') {
+            steps {
+                mail to: 'amruthadarbha01@gmail.com', 
+                     subject: 'Jenkins Job Notification', 
+                     body: "Job: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
+            }
+        }
+    }
+}
